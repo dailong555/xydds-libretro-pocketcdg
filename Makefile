@@ -299,6 +299,16 @@ else ifeq ($(platform), miyoo)
 	CC_AS = /opt/miyoo/usr/bin/arm-linux-gcc
 	AR = /opt/miyoo/usr/bin/arm-linux-ar
 	CFLAGS += -fomit-frame-pointer -ffast-math -march=armv5te -mtune=arm926ej-s
+# XYDDS
+else ifeq ($(platform), xydds)
+	TARGET := $(TARGET_NAME)_libretro.so
+	fpic := -fPIC
+	SHARED := -shared -Wl,-version-script=link.T
+	CC = /opt/xydds/usr/bin/arm-linux-gcc
+	CC_AS = /opt/xydds/usr/bin/arm-linux-gcc
+	AR = /opt/xydds/usr/bin/arm-linux-ar
+	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mfpu=neon-vfpv4 -mfloat-abi=hard
+	CFLAGS += -DARM -mcpu=cortex-a7
 
 # Nintendo Switch (libnx)
 else ifeq ($(platform), libnx)
